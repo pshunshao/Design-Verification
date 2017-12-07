@@ -1,0 +1,16 @@
+calc1_top.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/calc1_top.v
+alu_input_stage.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/alu_input_stage.v
+alu_output_stage.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/alu_output_stage.v
+exdbin_mac.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/exdbin_mac.v
+holdreg.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/holdreg.v
+mux_out.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/mux_out.v
+priority.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/priority.v
+shifter.v
+/home/fe15/sp15240/linux/Documents/designverification/testbench/shifter.v

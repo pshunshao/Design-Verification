@@ -1,0 +1,165 @@
+[] Run:
+
+WITH CODE AND FUNCTIONAL COVERAGE:
+
+irun calc1_sn_env.e calc1_sn.v -gui -access rw -coverage all -covtest my_code_coverage_results -snprerun "config cover -write_model=ucm" -nosncomp &
+
+FOR FUNCTIONAL COVERAGE:
+
+irun -snprerun "config cover -write_model=ucm" ...
+
+ALT - WITHOUT CODE/FUNCTIONAL COVERAGE:
+irun         calc1_sn_env.e calc1_sn.v -gui -access rw -coverage all -nosncomp &
+irun -snload calc1_sn_env.e calc1_sn.v -gui -access rw -coverage all -nosncomp &
+
+
+[] Look at the terminal to see what was executed after command!
+
+[] Two windows: Design Browser and Console - in simulator tab.
+
+[] In Console: Show the interface to simulator on LHS of Console and interface
+to sn on RHS of Console. Explore what the buttons do; some control the
+simulator (LHS) and the others control sn (RHS).
+
+Files loaded (use the show loaded "e" modules tab):
+
+calc1_sn_env.e
+coverage.e
+driver.e
+instruction.e
+test_example.e
+
+[] Show these files by pressing the "Show loaded e modules" button in Console.
+
+[] In Console in simulator tab.
+Show sn tab.
+- Can issue simulator or sn commands in respective tabs.
+
+[] Show Design Browser in upper window.
+Show calc1_sn design.
+
+[] Just for calc1_sn (do NOT go lower in the hierarchy as this exposes internal
+signals we are not familiar with - the top-level ones are fine):
+- signals can be sent to waveform viewer: top tool bar - wave!
+- Alternatively, right click on a signal - then "Send to ... > Waveform
+Window".
+(- Adjust radix to decimal so it makes more sense to look at the values.)
+
+
+[] In Console show sys in Data Browser - press yellow Data Browser button.
+Show driver. Nothing yet > NULL!
+Press SN test button.
+Look at driver again:
+- now show all the declared ports by clicking on driver.
+
+Show (click on) instructions_to_drive on LHS of Data Browser window under driver.
+- now the data has been populated - inspect the data.
+
+Show data generated for the instructions.
+! Look at responses - these are not yet filled in - WHY?
+Close Data Browser.
+
+
+[] From simulator tab, press run button.
+
+[] In the specman window, watch the messages created for each test. These can be used for bug finding.
+[] Also have a look at the waveforms generated in the Waveform window.
+
+[] Now view sys - response and data have been populated :) - WHY?
+
+[] Now perform Coverage Analysis:
+- First close all sim and sn tool windows using File>Closse rather than killing
+them. This writes the coverage data collected during simulation into:
+
+<current-directory>/cov_work/scope/my_code_coverage_results
+
+- Then call IMC from the terminal using:
+> imc &
+
+IMC opens in a new window.
+NOTE: It is important that the sim and sn tools are closed proerly (File>Close)
+rather than killing them. Coverage data is only being written to
+
+<current-directory>/cov_work/scope/my_code_coverage_results
+
+if the sessions have been closed properly.
+
+Load coverage data from:
+<current-directory>/cov_work/scope/my_code_coverage_results
+into IMC.
+
+
+Show All Metrics > Overall coverage first.
+Then change to individual metrics.
+Start with structural coverage first.
+Then switch to functional: Views > All Metrics View -> Functional View
+Types +> instruction_s <right click on instruciton_s>
+
+Analyze > Cover Group
+This shows the items for which coverage has been collected.
+- Show coverage of items: Click on "cmd_in" and "resp"
+  Partial coverage!
+- Show coverage of crosses: Click on "cross"!
+  Investigate all members of the cross, correlate back to coverage definition.
+  - go to "Source" tab in the window below
+  - click on item cmd_in > cmd_in coverage view
+  - click on item resp > resp coverage view
+  - click on cross > get back to view of full cross :)
+  Partial coverage!
+
+Close IMC!
+
+[] Now call irun again as you did before, e.g. using
+
+irun calc1_sn_env.e calc1_sn.v -gui -access rw -coverage all -covtest my_code_coverage_results -snprerun "config cover -write_model=ucm" -nosncomp &
+
+If time permits:
+
+[] Change the constraints in the test file and re-load e modules, view sys,
+issue test, view sys again, run simulation, view sys, close simulation/sn
+windowns and re-evaluate coverage.
+
+There may be a need to increase the tick_max limit, do this by issuing the
+following command from the sn tab:
+
+set_config(run,tick_max,10000000)
+ALT: Use SN Config Button > RUN > set tick max
+
+[] EXIT from both windows - bottom one first!
+CLEAN EXIT IS IMPORTANT TO WRITE COVERAGE DATA!
+
+[] Now change the .e file to generate more tests:
+- introduce a random seed
+- change the constraints :)
+
+Examples are in these NEW .e files:
+
+complete_test.e
+my_instruction.e
+driver.e - same as before
+calc1_tb_sn_env.e - no imports, these are now done here
+coverage.e - same as before
+
+Load these new .e files into an editor and show the changes, or alter the prior
+.e files. :)
+
+in SN tab: restore specman :)
+
+[] Run: irun complete_test.e ... <as above>
+[] Look at what data has been created - sys in Data Browser.
+[] Run.
+[] Look at coverage.
+[] Look at bugs found.
+[] Reset.
+[] Run again - different data!
+[] Exit :)
+
+If the test file is changed, i.e. the constraints for the test are changed then:
+
+- Reset sim time back to 0
+- Restore sn
+- Reload e code
+- Launch sn test
+- Run simulation
+
+ALL FEATURES DEMONSTRATED - ALL DONE :)

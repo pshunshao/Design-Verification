@@ -1,0 +1,24 @@
+irun(64): 14.10-s004: (c) Copyright 1995-2014 Cadence Design Systems, Inc.
+TOOL:	irun(64)	14.10-s004: Started on Dec 07, 2017 at 18:16:49 GMT
+irun
+	calc1_sn_env.e
+	calc1_sn.v
+	-gui
+	-access rw
+	-coverage all
+	-covtest my_code_coverage_results
+	-snprerun "config cover -write_model=ucm"
+	-nosncomp
+Initializing Incisive Enterprise Simulator(64) (14.10 Build 91)  -  Linked on Sun Aug 17 20:21:58 2014
+
+
+
+-------------------------------------
+Relinquished control to SimVision...
+ncsim> 
+ncsim> source /usr/local/cadence/2014-15/INCISIV141/tools/inca/files/ncsimrc
+ncsim> column symbol doesnt exist in table^C
+ncsim> exit
+ncsim: *E,C58EXE: Coverage database file already exists in the test output directory './cov_work/scope/my_code_coverage_results', and will not be overwritten. Specify a different name for the test output directory or use the '-covoverwrite' option to overwrite the existing test output directory, and rerun the simulation.
+ncsim: *E,C58EXE: Coverage database file already exists in the test output directory './cov_work/scope/my_code_coverage_results', and will not be overwritten. Specify a different name for the test output directory or use the '-covoverwrite' option to overwrite the existing test output directory, and rerun the simulation.
+TOOL:	irun(64)	14.10-s004: Exiting on Dec 07, 2017 at 18:17:13 GMT  (total: 00:00:24)
